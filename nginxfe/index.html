@@ -6,94 +6,89 @@
   <title>Simple Card Links</title>
   <style>
     :root {
-      --bg: #f6f7f9;
-      --card: #ffffff;
-      --text: #111318;
-      --muted: #646b75;
-      --line: #e6e8ec;
-      --accent: #2b6cf6;
+      --bg-gradient: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      --card-bg-1: #ffe0e0;
+      --card-bg-2: #e0f7ff;
+      --card-bg-3: #e0ffe8;
+      --card-bg-4: #fff0e0;
+      --card-bg-5: #f0e0ff;
+      --text: #2c2c2c;
+      --muted: #555;
+      --border: #ddd;
+      --hover: #222;
     }
 
     * { box-sizing: border-box; }
-    html, body { height: 100%; }
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      line-height: 1.5;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-gradient);
       color: var(--text);
-      background: var(--bg);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     .container {
-      max-width: 1100px;
-      margin: clamp(16px, 4vw, 48px) auto;
+      max-width: 1000px;
+      margin: 40px auto;
       padding: 0 16px;
     }
 
     header h1 {
-      font-size: clamp(1.25rem, 2vw + 1rem, 1.75rem);
-      margin: 0 0 4px;
+      font-size: 2rem;
+      margin-bottom: 8px;
+      text-align: center;
     }
+
     header p {
-      margin: 0 0 16px;
+      text-align: center;
       color: var(--muted);
+      margin-bottom: 32px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
     }
 
-    /* Card as a full-link block */
     .card {
       display: block;
-      padding: 16px;
-      border-radius: 12px;
-      background: var(--card);
-      border: 1px solid var(--line);
+      padding: 20px;
+      border-radius: 16px;
       text-decoration: none;
-      color: inherit;
-      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
-      transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
-      min-height: 120px;
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .card:hover,
-    .card:focus-visible {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
-      border-color: #d9dee5;
-      outline: none;
-    }
-    .card:active {
-      transform: translateY(0);
-      box-shadow: 0 4px 12px rgba(16, 24, 40, 0.08);
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      color: var(--hover);
     }
 
     .card h2 {
-      margin: 0 0 8px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
     }
+
     .card p {
       margin: 0;
       color: var(--muted);
-      font-size: 0.95rem;
     }
 
-    /* Respect users who prefer less motion */
-    @media (prefers-reduced-motion: reduce) {
-      .card { transition: none; }
-    }
+    .card:nth-child(1) { background: var(--card-bg-1); }
+    .card:nth-child(2) { background: var(--card-bg-2); }
+    .card:nth-child(3) { background: var(--card-bg-3); }
+    .card:nth-child(4) { background: var(--card-bg-4); }
+    .card:nth-child(5) { background: var(--card-bg-5); }
 
     footer {
       text-align: center;
-      margin-top: 20px;
-      color: var(--muted);
+      margin-top: 40px;
       font-size: 0.9rem;
+      color: var(--muted);
     }
   </style>
 </head>
@@ -122,16 +117,16 @@
 
       <a class="card" href="page-4.html">
         <h2>Card Four</h2>
-        <p>More on the fourth page.</p>
+        <p>More on the fourth page. coming up soon</p>
       </a>
 
       <a class="card" href="page-5.html">
         <h2>Card Five</h2>
-        <p>Jump to the fifth page.</p>
+        <p>Jump to the fifth page. coming up soon</p>
       </a>
     </section>
 
-    <footer>Built with plain HTML & CSS. Fully responsive.</footer>
+    <!--<footer>Built with plain HTML & CSS. Fully responsive.</footer>-->
   </main>
 </body>
 </html>
