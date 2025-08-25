@@ -1,0 +1,59 @@
+services:
+  # Primary host of all services - behind 10y TLS
+  nginx:
+    image: nginx:stable
+    restart: always
+    volumes:
+      - "./nginxconfigs:/etc/nginx"
+      - "./nginxssl:/cft:ro"
+    ports:
+      - 443:443
+      - 80:80
+    links:
+      - vaultwarden 
+      - kiwix
+      - silverbullet
+    networks:
+      - frontend_network
+
+  kiwix:
+    image: ghcr.io/kiwix/kiwix-serve:latest
+    volumes:
+      - ./kiwix/library:/data
+      - ./kiwix/c_start.sh:/usr/local/bin/start.sh
+    environment:
+      - ROOTPATH=/wiki
+    command:
+      '*.zim'
+    restart: always
+    networks:
+      - frontend_network
+
+  silverbullet:
+    image: ghcr.io/silverbulletmd/silverbullet:v2
+    restart: unless-stopped
+    environment:
+    - SB_USER=admin:admin
+    - SB_URL_PREFIX=notes
+    volumes:
+      - ./silverbullet/space:/space
+    networks:
+      - frontend_network
+
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      - SIGNUPS_ALLOWED=true
+      - DOMAIN=https://192.168.1.10/vaultwarden
+        #- ADMIN_TOKEN=zILNpKFXAYy5zVVRVJtjs/ABdfG5ly4McJAdKYDxH0cvRCgJ4D+5KvTL4oi2Qu5+
+    volumes:
+      - ./vw-data/:/data/
+        #- ./resolv.conf:/etc/resolv.conf:ro
+    networks:
+      - frontend_network
+
+networks:
+  frontend_network:
+    driver: bridge
