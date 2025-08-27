@@ -14,6 +14,7 @@ services:
       - vaultwarden 
       - kiwix
       - silverbullet
+      - pihole
     networks:
       - frontend_network
 
@@ -38,6 +39,26 @@ services:
     - SB_URL_PREFIX=notes
     volumes:
       - ./silverbullet/space:/space
+    networks:
+      - frontend_network
+
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      # DNS Ports
+      - "53:53/tcp"
+      - "53:53/udp"
+    environment:
+      TZ: 'Asia/Calcutta'
+      FTLCONF_dns_listeningMode: 'all'
+    volumes:
+      # For persisting Pi-hole's databases and common configuration file
+      - './pihole/etc-pihole:/etc/pihole'
+      - './pihole/etc_resolv.conf:/etc/resolv.conf'
+    cap_add:
+      - SYS_NICE
+    restart: always
     networks:
       - frontend_network
 
