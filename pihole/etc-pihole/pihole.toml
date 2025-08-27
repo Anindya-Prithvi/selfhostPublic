@@ -1,7 +1,7 @@
 # Pi-hole configuration file (v6.2.3)
 # Encoding: UTF-8
 # This file is managed by pihole-FTL
-# Last updated on 2025-08-27 23:27:49 IST
+# Last updated on 2025-08-27 23:34:53 IST
 
 [dns]
   # Array of upstream DNS servers used by Pi-hole
@@ -879,7 +879,7 @@
 
     # How much history should be imported from the database and returned by the API
     # [seconds]? (max 24*60*60 = 86400)
-    maxHistory = 186400 ### CHANGED, default = 86400
+    maxHistory = 286400 ### CHANGED, default = 86400
 
     # Up to how many clients should be returned in the activity graph endpoint
     # (/api/history/clients)?

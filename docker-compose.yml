@@ -52,6 +52,7 @@ services:
     environment:
       TZ: 'Asia/Calcutta'
       FTLCONF_dns_listeningMode: 'all'
+      FTLCONF_webserver_api_password: ''
     volumes:
       # For persisting Pi-hole's databases and common configuration file
       - './pihole/etc-pihole:/etc/pihole'
