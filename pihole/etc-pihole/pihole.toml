@@ -1,7 +1,7 @@
 # Pi-hole configuration file (v6.2.3)
 # Encoding: UTF-8
 # This file is managed by pihole-FTL
-# Last updated on 2025-08-28 00:50:21 IST
+# Last updated on 2025-08-28 01:28:25 IST
 
 [dns]
   # Array of upstream DNS servers used by Pi-hole
@@ -583,7 +583,7 @@
 
   # How long should queries be stored in the database [days]?
   # Setting this value to 0 will disable the database.
-  maxDBdays = 30 ### CHANGED, default = 91
+  maxDBdays = 7 ### CHANGED, default = 91
 
   # How often do we store queries in FTL's database [seconds]?
   DBinterval = 60
@@ -605,7 +605,7 @@
     # How long should IP addresses be kept in the network_addresses table [days]? IP
     # addresses (and associated host names) older than the specified number of days are
     # removed to avoid dead entries in the network overview table.
-    expire = 30 ### CHANGED, default = 91
+    expire = 7 ### CHANGED, default = 91
 
 [webserver]
   # On which domain is the web interface served?
@@ -879,7 +879,7 @@
 
     # How much history should be imported from the database and returned by the API
     # [seconds]? (max 24*60*60 = 86400)
-    maxHistory = 286400 ### CHANGED, default = 86400
+    maxHistory = 86400
 
     # Up to how many clients should be returned in the activity graph endpoint
     # (/api/history/clients)?
@@ -1199,7 +1199,7 @@
   all = false
 
 # Configuration statistics:
-# 155 total entries out of which 142 entries are default
-# --> 13 entries are modified
+# 155 total entries out of which 143 entries are default
+# --> 12 entries are modified
 # 1 entry is forced through environment:
 #   - dns.listeningMode

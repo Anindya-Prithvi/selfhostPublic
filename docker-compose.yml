@@ -17,6 +17,7 @@ services:
       - pihole
     networks:
       - frontend_network
+    mem_limit: 500m
 
   kiwix:
     image: ghcr.io/kiwix/kiwix-serve:latest
@@ -30,6 +31,7 @@ services:
     restart: always
     networks:
       - frontend_network
+    mem_limit: 1g
 
   silverbullet:
     image: ghcr.io/silverbulletmd/silverbullet:v2
@@ -41,6 +43,7 @@ services:
       - ./silverbullet/space:/space
     networks:
       - frontend_network
+    mem_limit: 200m
 
   pihole:
     container_name: pihole
@@ -62,6 +65,7 @@ services:
     restart: always
     networks:
       - frontend_network
+    mem_limit: 500m
 
   vaultwarden:
     image: vaultwarden/server:latest
@@ -76,6 +80,7 @@ services:
         #- ./resolv.conf:/etc/resolv.conf:ro
     networks:
       - frontend_network
+    mem_limit: 500m
 
 networks:
   frontend_network:
