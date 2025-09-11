@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simple Card Links</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      --card-bg-1: #ffe0e0;
+      --card-bg-2: #e0f7ff;
+      --card-bg-3: #e0ffe8;
+      --card-bg-4: #fff0e0;
+      --card-bg-5: #f0e0ff;
+      --text: #2c2c2c;
+      --muted: #555;
+      --border: #ddd;
+      --hover: #222;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    header p {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      display: block;
+      padding: 20px;
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      color: var(--hover);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .card:nth-child(1) { background: var(--card-bg-1); }
+    .card:nth-child(2) { background: var(--card-bg-2); }
+    .card:nth-child(3) { background: var(--card-bg-3); }
+    .card:nth-child(4) { background: var(--card-bg-4); }
+    .card:nth-child(5) { background: var(--card-bg-5); }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Pick a card</h1>
+      <p>Tap any card to open its page. No JavaScript required.</p>
+    </header>
+
+    <section class="grid" aria-label="Card links">
+      <a class="card" href="./wiki">
+        <h2>Offline Wikipedia</h2>
+        <p>Collection of wikipedia/stackexchange/community contributors to restart humanity if required.</p>
+      </a>
+
+      <a class="card" href="./vaultwarden">
+        <h2>OnPremise Password Manager</h2>
+        <p>All passwords and credentials stay on device (usable with Bitwarden client)</p>
+      </a>
+
+      <a class="card" href="./notes">
+        <h2>Quick Notes!</h2>
+	<p>Quickly scrible markdown, forget about <pre><C-s></pre></p>
+      </a>
+
+      <a class="card" href="./immich">
+        <h2>Immich</h2>
+        <p>Replacement for Google Photos. Maintained on-premise. Has photos from 2012 and earlier too.</p>
+      </a>
+
+      <a class="card" href="./navidrome">
+        <h2>Navidrome</h2>
+        <p>Self-Hosted Music Library. Sourced from pirated and noisy records!</p>
+      </a>
+    </section>
+
+    <!--<footer>Built with plain HTML & CSS. Fully responsive.</footer>-->
+  </main>
+</body>
+</html>
+
