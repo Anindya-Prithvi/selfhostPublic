@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>System Monitor</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body { font-family: sans-serif; margin: 2em; background: #f4f4f4; }
+.card { background:white; padding:25px; border-radius:12px; box-shadow:0 4px 6px rgba(0,0,0,0.1); max-width:900px; margin:20px auto;}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+<h2>CPU Temperature</h2>
+<canvas id="tempChart"></canvas>
+</div>
+
+<div class="card">
+<h2>Network RTT (Ping)</h2>
+<canvas id="pingChart"></canvas>
+</div>
+
+
+<script>
+
+async function renderTemp(){
+
+const response = await fetch('temp_log.csv');
+const text = await response.text();
+
+const lines = text.split('\n').slice(1);
+
+let labels=[]
+let values=[]
+
+lines.forEach(line=>{
+    const p=line.split(',')
+    if(p.length==2){
+        labels.push(p[0].split(' ')[1])
+        values.push(parseFloat(p[1]))
+    }
+})
+
+new Chart(document.getElementById('tempChart'),{
+type:'line',
+data:{
+labels:labels,
+datasets:[{
+label:'Temp °C',
+data:values,
+borderColor:'#e74c3c',
+fill:true,
+pointRadius:0
+}]
+}
+})
+
+}
+
+
+async function renderPing(){
+
+const response = await fetch('ping_log.csv')
+const text = await response.text()
+
+const lines = text.split('\n').slice(1)
+
+let labels=[]
+let min=[]
+let avg=[]
+let max=[]
+let mdev=[]
+
+lines.forEach(line=>{
+    const p=line.split(',')
+    if(p.length==5){
+        labels.push(p[0].split(' ')[1])
+        min.push(parseFloat(p[1]))
+        avg.push(parseFloat(p[2]))
+        max.push(parseFloat(p[3]))
+        mdev.push(parseFloat(p[4]))
+    }
+})
+
+new Chart(document.getElementById('pingChart'),{
+
+type:'line',
+
+data:{
+labels:labels,
+datasets:[
+{
+label:'min',
+data:min,
+borderColor:'#3498db',
+pointRadius:0
+},
+{
+label:'avg',
+data:avg,
+borderColor:'#2ecc71',
+pointRadius:0
+},
+{
+label:'max',
+data:max,
+borderColor:'#e67e22',
+pointRadius:0
+},
+{
+label:'mdev',
+data:mdev,
+borderColor:'#9b59b6',
+pointRadius:0
+}
+]
+}
+
+})
+
+}
+
+
+renderTemp()
+renderPing()
+
+</script>
+
+</body>
+</html>
