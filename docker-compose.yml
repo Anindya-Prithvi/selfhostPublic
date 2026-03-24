@@ -7,17 +7,28 @@ services:
       - "./nginxconfigs:/etc/nginx"
       - "./nginxssl:/cft:ro"
       - "./nginxfe:/app"
+      - "../fecace/aion_c:/rfsk:ro"
     ports:
       - 443:443
       - 80:80
     links:
       - vaultwarden 
       - kiwix
-      - silverbullet
       - pihole
     networks:
       - frontend_network
     mem_limit: 500m
+
+  searxng:
+    image: ghcr.io/searxng/searxng:latest
+    volumes: 
+      - ./searxng/config/:/etc/searxng/
+      - ./searxng/data/:/var/cache/searxng/
+      - ./searxng/etc_resolv.conf:/etc/resolv.conf
+    mem_limit: 300m
+    ports:
+      - 20080:8080
+    restart: always
 
   kiwix:
     image: ghcr.io/kiwix/kiwix-serve:latest
@@ -27,23 +38,23 @@ services:
     environment:
       - ROOTPATH=/wiki
     command:
-      '*.zim'
+      '/data/*.zim'
     restart: always
     networks:
       - frontend_network
     mem_limit: 1g
 
-  silverbullet:
-    image: ghcr.io/silverbulletmd/silverbullet:v2
-    restart: unless-stopped
-    environment:
-    - SB_USER=admin:admin
-    - SB_URL_PREFIX=notes
-    volumes:
-      - ./silverbullet/space:/space
-    networks:
-      - frontend_network
-    mem_limit: 200m
+      #silverbullet:
+      #image: ghcr.io/silverbulletmd/silverbullet:v2
+      #restart: none
+      # environment:
+      # - SB_USER=admin:admin
+      # - SB_URL_PREFIX=notes
+      #volumes:
+      #- ./silverbullet/space:/space
+      # networks:
+      #- frontend_network
+      #mem_limit: 200m
 
   pihole:
     container_name: pihole
